@@ -1,0 +1,13 @@
+.videos-container {
+    min-height: 70vh;
+    max-height: 70vh;
+    color: #FFFFFF;
+}
+
+.col-4 {
+    padding-left: 0;
+}
+
+.col-8 {
+    padding-right: 0;
+}

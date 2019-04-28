@@ -1,0 +1,32 @@
+.row {
+    min-height: 100%;
+    border-bottom: 1px solid #2B2B2B;
+}
+
+input.form-control {
+    background-color: rgb(38, 38, 57);
+    border: none;
+    border-top-left-radius: 15px; 
+    border-bottom-left-radius: 15px;
+    outline: none;
+    box-shadow: none;
+    color: #FFFFFF;
+}
+
+input::placeholder {
+    color: #FFFFFF;
+}
+
+.input-group .input-group-append .btn {
+    background-color: rgb(38, 38, 57);
+    border: none;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    color: #FFFFFF;
+}
+
+.btn:focus,.btn:active:focus,.btn.active:focus,
+.btn.focus,.btn:active.focus,.btn.active.focus {
+    outline: none;
+    box-shadow: none;
+}

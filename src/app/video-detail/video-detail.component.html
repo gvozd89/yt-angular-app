@@ -1,0 +1,17 @@
+<div class="video-container">
+
+  <div class="d-flex h-100" *ngIf="videoDetails.length === 0; else displayVideo">
+    <h4 class="m-auto">Start seaching for videos to get results</h4>
+  </div>
+
+  <ng-template #displayVideo>
+      <iframe width="100%" height="100%" 
+              [src]="cleanUrl()"
+              frameborder="0" 
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+      </iframe>
+      <div class="title">{{ videoDetails[0]?.title }} </div>
+  </ng-template>
+  
+</div>
