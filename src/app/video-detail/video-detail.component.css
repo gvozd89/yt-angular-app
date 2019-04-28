@@ -3,3 +3,18 @@
     height: 100%;
     color: #FFFFFF;
 }
+
+.video-info .channel {
+    height: 50px;
+}
+
+.video-info .title {
+    height: 50px;
+    font-size: 18px;
+}
+
+.video-info .description {
+    height: auto;
+    font-size: 14px;
+    color: rgb(105, 105, 121);
+}

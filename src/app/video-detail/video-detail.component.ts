@@ -12,6 +12,9 @@ import { API_ENDPOINTS } from '../constants/api-endpoints';
 export class VideoDetailComponent implements OnInit {
   public videoDetails: VideoDetail[];
   public videoUrl = '';
+  public channelName: string;
+  public videoTitle: string;
+  public description: string;
 
 
   constructor(private youtubeSearchService: YoutubeSearchService,
@@ -23,21 +26,29 @@ export class VideoDetailComponent implements OnInit {
         this.videoDetails = data;
         if (this.videoDetails.length !== 0) {
           this.videoUrl = this.videoDetails[0].id;
+          this.channelName = this.videoDetails[0].channelTitle;
+          this.videoTitle = this.videoDetails[0].title;
+          this.description = this.videoDetails[0].description;
         }
       }
     );
     
     this.youtubeSearchService.videoUrl.subscribe(
        data => {
-         // console.log(data);
-         this.videoUrl = data;
-         // this.cleanUrl(this.relatedUrl);
+         if (data) {
+          // console.log(data);
+          this.videoUrl = data.videoId;
+          this.channelName = data.snippets.channelTitle;
+          this.videoTitle = data.snippets.title;
+          this.description = data.snippets.description;
+        }
        }
     );
   }
 
   cleanUrl() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(API_ENDPOINTS.YT_EMBED + this.videoUrl);
-  }
-  
+    if (this.videoDetails.length !== 0) {
+      return this.sanitizer.bypassSecurityTrustResourceUrl(API_ENDPOINTS.YT_EMBED + this.videoUrl);
+    }
+  }  
 }

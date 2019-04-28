@@ -11,7 +11,16 @@
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
               allowfullscreen>
       </iframe>
-      <div class="title">{{ videoDetails[0]?.title }} </div>
+      <div class="video-info d-flex flex-column">
+        <div class="channel d-flex">
+          <h5 class="my-auto mr-2">
+            {{ channelName }} 
+          </h5>
+          <h5 class="my-auto">Channel</h5>
+        </div>
+        <div class="title">{{ videoTitle }} </div>
+        <div class="description">{{ description }}</div>
+      </div>
   </ng-template>
   
 </div>

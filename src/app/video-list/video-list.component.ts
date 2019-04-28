@@ -19,18 +19,28 @@ export class VideoListComponent implements OnInit {
         this.videoDetails = data;
         // console.log(this.videoDetails);
         if (this.videoDetails.length !== 0) {
-          console.log('udjem li tu?!"#!"$&#%/(#$%(/');
-          this.youtubeSearchService.searchRelatedVideos(this.videoDetails[0].id).subscribe(
-            response => {
-              this.relatedVideos = response.body
-              console.log(this.relatedVideos);
-          });
+          this.searchRelatedVideos(this.videoDetails[0].id);
         }
     });
   }
 
-  playVideo(videoId) {
-    this.youtubeSearchService.sendVideoUrl(videoId);
+  searchRelatedVideos(videoId) {
+    this.youtubeSearchService.searchRelatedVideos(videoId).subscribe(
+      response => {
+        this.relatedVideos = response.body;
+    });
+  }
+
+  playVideo(videoDetail) {
+    // console.log(videoDetail.id.videoId);
+    // console.log(videoDetail.snippet);
+    const videoInfo = 
+      {
+        videoId: videoDetail.id.videoId,
+        snippets: videoDetail.snippet,
+      }
+      this.youtubeSearchService.sendVideo(videoInfo);
+      this.searchRelatedVideos(videoInfo.videoId);
   }
 
 }

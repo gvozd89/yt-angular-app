@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
       _results => {
         // console.log(_results);
         this.youtubeSearchService.getVideoDetails(_results);
-        // this.youtubeSearchService.searchRelatedVideos(_results[0].id);
       },
       err => {
         console.log(err);

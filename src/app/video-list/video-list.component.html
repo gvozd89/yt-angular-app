@@ -1,17 +1,23 @@
-<div class="video-list d-flex flex-column p-2">
+<div class="video-list d-flex flex-column px-1">
+  <div class="title d-flex">
+    <h5 class="my-auto ml-2">
+      Related videos
+    </h5>
+  </div>
   <div *ngIf="videoDetails.length === 0; else displayVideo">
-    <h5>Related videos</h5>
+    
   </div>
   <ng-template #displayVideo>
-    <h5>Related videos</h5>
-    <div class="d-flex flex-column m-2" *ngFor="let related of relatedVideos?.items">
-      <div class="d-flex" (click)="playVideo(related?.id.videoId)">
-        <div class="w-30">
-          <img style="height: 100px; width: 150px;" src="{{related?.snippet?.thumbnails?.default?.url}}" alt="">
-        </div>
-        <div class="d-flex flex-column w-70 ml-2">
-          <div class="title" style="font-size: 14px;"> {{ related?.snippet?.title }} </div>
-          <div class="description" style="font-size: 12px;"> {{ related?.snippet?.description }} </div>
+    <div class="related">
+      <div *ngFor="let related of relatedVideos?.items">
+        <div class="related-video-container mb-2" (click)="playVideo(related)">
+          <div class="thumbnail">
+            <img src="{{related?.snippet?.thumbnails?.default?.url}}" alt="">
+          </div>
+          <div class="details">
+            <div class="related-title mb-2"> {{ related?.snippet?.title }} </div>
+            <div class="description"> {{ related?.snippet?.description }} </div>
+          </div>
         </div>
       </div>
     </div>

@@ -10,10 +10,10 @@ import { VideoDetail } from '../models/video-detail.model';
   providedIn: 'root'
 })
 export class YoutubeSearchService {
-  public videoDetails: BehaviorSubject<VideoDetail[]> = new BehaviorSubject<VideoDetail[]>([]);
+  private videoDetails: BehaviorSubject<VideoDetail[]> = new BehaviorSubject<VideoDetail[]>([]);
   videoDetail = this.videoDetails.asObservable();
 
-  public videoUrls: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  private videoUrls: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   videoUrl = this.videoUrls.asObservable();
 
   constructor(private httpClient: HttpClient) { }
@@ -36,6 +36,8 @@ export class YoutubeSearchService {
           title: item.snippet.title,
           description: item.snippet.description,
           thumbnailUrl: item.snippet.thumbnails.high.url,
+          channelTitle: item.snippet.channelTitle,
+          channelId: item.id.channelId,
         });
       });
     }));
@@ -51,10 +53,11 @@ export class YoutubeSearchService {
     ].join('&');
     
     const queryUrl = `${API_ENDPOINTS.YT_SEARCH}?${params}`;
-    console.log('udjem li tu?');
 
     return this.httpClient.get(queryUrl, { observe: 'response'});
 
+    // TRIED LINKING OBSERVABLES, HAD NO TIME 
+    
     // return this.httpClient.get(queryUrl).pipe(map(response => {
     //   return response['items'].map(item => {
     //     console.log('jesam tu');
@@ -68,11 +71,12 @@ export class YoutubeSearchService {
     // }));
   }
 
+
   getVideoDetails(newVideoDetail) {
     this.videoDetails.next(newVideoDetail);
   }
 
-  sendVideoUrl(url: string) {
-    this.videoUrls.next(url);
+  sendVideo(videoDetail) {
+    this.videoUrls.next(videoDetail);
   }
 }
